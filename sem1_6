@@ -1,0 +1,24 @@
+#include <iostream>
+#include <string>
+
+struct Book {
+    char title[100];
+    int pages;
+    float price;
+};
+
+bool isExpensive(const Book &book) {
+    return book.price > 1000;
+}
+
+int main() {
+    Book myBook = {"Advanced Programming", 500, 1200};
+
+    if (isExpensive(myBook)) {
+        std::cout << "true" << std::endl;
+    } else {
+        std::cout << "false" << std::endl;
+    }
+
+    return 0;
+}
