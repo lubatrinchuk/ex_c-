@@ -1,0 +1,25 @@
+#include <iostream>
+#include <string>
+
+
+std::string operator*(const std::string& s, int n) {
+    std::string result;
+    for (int i = 0; i < n; ++i) {
+        result += s;
+    }
+    return result;
+}
+
+int main() {
+    std::string input = "Hello ";
+    int repetitionCount = 3;
+
+    
+    std::string result = input * repetitionCount;
+
+    
+    std::cout << "Original String: " << input << std::endl;
+    std::cout << "Repeated " << repetitionCount << " times: " << result << std::endl;
+
+    return 0;
+}
