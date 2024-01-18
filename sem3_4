@@ -1,0 +1,25 @@
+#include <iostream>
+#include <string>
+
+void truncateToDot(std::string& s) {
+    size_t dotPos = s.find('.');
+
+    
+    if (dotPos != std::string::npos) {
+        s.erase(dotPos + 1); 
+        s.shrink_to_fit();
+    }
+}
+
+int main() {
+    
+    std::string input = "cat.dog.mouse.elephant.tiger.lion";
+
+    std::cout << "Original String: " << input << std::endl;
+
+    truncateToDot(input);
+
+    std::cout << "Truncated String: " << input << std::endl;
+
+    return 0;
+}
