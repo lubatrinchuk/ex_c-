@@ -1,0 +1,13 @@
+#include <iostream>
+#include <string>
+
+std::string changeFirstLetterCase(const std::string& input) {
+    if (input.empty()) {
+        return "Empty String";
+    }
+
+    std::string result = input;
+    result[0] = islower(result[0]) ? toupper(result[0]) : tolower(result[0]);
+
+    return result;
+}
