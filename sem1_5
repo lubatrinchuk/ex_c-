@@ -1,0 +1,11 @@
+#include <iostream>
+
+struct Book {
+    char title[100];
+    int pages;
+    float price;
+};
+
+void addPrice(Book &book, float x) {
+    book.price += x;
+}
