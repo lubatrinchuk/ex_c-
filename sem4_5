@@ -1,0 +1,37 @@
+#include <iostream>
+#include <vector>
+#include <string>
+#include <utility>
+
+template <typename T>
+T findMax(const std::vector<T>& vec) {
+    if (vec.empty()) {
+        return T();
+    }
+
+    T maxElement = vec[0];
+
+    for (const T& element : vec) {
+        if (element > maxElement) {
+            maxElement = element;
+        }
+    }
+
+    return maxElement;
+}
+
+int main() {
+    std::vector<int> intVector = { 5, 2, 8, 1, 7 };
+    std::cout << "Max Element in intVector: " << findMax(intVector) << std::endl;
+
+    std::vector<float> floatVector = { 3.5f, 1.2f, 8.9f, 2.3f, 5.7f };
+    std::cout << "Max Element in floatVector: " << findMax(floatVector) << std::endl;
+
+    std::vector<std::string> stringVector = { "apple", "orange", "banana", "grape", "kiwi" };
+    std::cout << "Max Element in stringVector: " << findMax(stringVector) << std::endl;
+
+    std::vector<std::pair<int, int>> pairVector = { {1, 5}, {2, 3}, {4, 2}, {3, 7}, {1, 9} };
+    std::cout << "Max Element in pairVector: {" << findMax(pairVector).first << ", " << findMax(pairVector).second << "}" << std::endl;
+
+    return 0;
+}
