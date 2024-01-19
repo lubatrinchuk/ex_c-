@@ -1,0 +1,100 @@
+#include <iostream>
+#include <vector>
+#include <sstream>
+
+class Time
+{
+private:
+    int mHours, mMinutes, mSeconds;
+
+public:
+    Time(int hours, int minutes, int seconds) : mHours(hours), mMinutes(minutes), mSeconds(seconds) {}
+
+    Time(const std::string &s)
+    {
+        std::stringstream ss(s);
+        char delimiter;
+        ss >> mHours >> delimiter >> mMinutes >> delimiter >> mSeconds;
+    }
+
+    Time operator+(const Time &b) const
+    {
+        int totalSeconds = mHours * 3600 + mMinutes * 60 + mSeconds +
+                           b.mHours * 3600 + b.mMinutes * 60 + b.mSeconds;
+
+        int hours = totalSeconds / 3600;
+        int minutes = (totalSeconds % 3600) / 60;
+        int seconds = totalSeconds % 60;
+
+        return Time(hours, minutes, seconds);
+    }
+
+    int hours() const
+    {
+        return mHours;
+    }
+
+    int minutes() const
+    {
+        return mMinutes;
+    }
+
+    int seconds() const
+    {
+        return mSeconds;
+    }
+
+    friend std::ostream &operator<<(std::ostream &out, const Time &t);
+};
+
+std::ostream &operator<<(std::ostream &out, const Time &t)
+{
+    out << std::setfill('0') << std::setw(2) << t.hours() << ":"
+        << std::setfill('0') << std::setw(2) << t.minutes() << ":"
+        << std::setfill('0') << std::setw(2) << t.seconds();
+    return out;
+}
+
+std::vector<Time> getTimesFromString(const std::string &s)
+{
+    std::vector<Time> times;
+    std::stringstream ss(s);
+    std::string timeString;
+
+    while (ss >> timeString)
+    {
+        times.emplace_back(timeString);
+    }
+
+    return times;
+}
+
+Time sumTimes(const std::vector<Time> &v)
+{
+    Time sum(0, 0, 0);
+
+    for (const Time &t : v)
+    {
+        sum = sum + t;
+    }
+
+    return sum;
+}
+
+int main()
+{
+    std::string inputString = "11:20:05 05:45:30 22:10:45";
+    std::vector<Time> times = getTimesFromString(inputString);
+
+    std::cout << "Times from string:" << std::endl;
+    for (const Time &t : times)
+    {
+        std::cout << t << std::endl;
+    }
+
+    Time totalTime = sumTimes(times);
+
+    std::cout << "\nTotal Sum of Times: " << totalTime << std::endl;
+
+    return 0;
+}
