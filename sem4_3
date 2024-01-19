@@ -1,0 +1,40 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+
+std::vector<std::pair<int, int>> factorization(int n) {
+    std::vector<std::pair<int, int>> primeFactors;
+
+    while (n % 2 == 0) {
+        primeFactors.emplace_back(2, 1);
+        n /= 2;
+    }
+
+    for (int i = 3; i <= std::sqrt(n); i += 2) {
+        while (n % i == 0) {
+            primeFactors.emplace_back(i, 1);
+            n /= i;
+        }
+    }
+
+    if (n > 2) {
+        primeFactors.emplace_back(n, 1);
+    }
+
+    return primeFactors;
+}
+
+int main() {
+    
+    int number = 626215995;
+
+    std::vector<std::pair<int, int>> result = factorization(number);
+
+    std::cout << "Prime Factorization of " << number << ":\n";
+    for (const auto& factor : result) {
+        std::cout << factor.first << "^" << factor.second << " ";
+    }
+    std::cout << std::endl;
+
+    return 0;
+}
